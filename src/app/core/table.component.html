@@ -1,0 +1,60 @@
+<div class="container-fluid" style="background-color: lightcyan">
+  <div class="row mb-3">
+    <div class="col">
+      <table class="table table-sm table-bordered table-striped">
+        <tbody>
+          <tr>
+            <th></th>
+            <th style="text-align:center">Dirección</th>
+            <th style="text-align:center">Metros cuadrados</th>
+            <th style="text-align:center">Precio</th>
+            <th style="text-align:center">Comercial</th>
+            <th style="text-align:center">Acción</th>
+          </tr>
+
+          <tr *ngFor="let item of getViviendas()">
+            <td style="text-align:center">{{item.id}}</td>
+            <td style="text-align: center">{{item.direccion}}</td>
+            <td style="text-align: center">{{item.metros}}</td>
+            <td style="text-align: center">{{item.precio | currency:"EUR" }}</td>
+            <td style="text-align: center">{{item.comercial}}</td>
+            <td class="text-center">
+              <button class="btn btn-warning btn-sm"
+                      [routerLink]="['/form', 'edit',item.id]">
+                Editar
+              </button>
+              &nbsp;
+              <button class="btn btn-danger btn-sm"
+                      (click)="deleteVivienda(item.id)">
+                Eliminar
+              </button>              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-12 p-2 text-center">
+      <button class="btn btn-primary m-1" routerLink="/form/create">
+        Añadir nueva vivienda
+      </button>
+    </div>
+
+    <div class="col-12 p-2 text-center">
+      <button *ngFor="let comercial of comerciales"
+              class="btn btn-secondary btn-block"
+              [routerLink]="['/table', comercial]"
+              routerLinkActive="bg-primary">
+        {{comercial}}
+      </button>
+
+      <br /><br />
+
+      <button class="btn btn-secondary btn-block"
+              routerLink="/" routerLinkActive="bg-primary"
+              [routerLinkActiveOptions]="{exact: true}">
+        Mostrar todos
+      </button>
+    </div>
+  </div>
+</div>
